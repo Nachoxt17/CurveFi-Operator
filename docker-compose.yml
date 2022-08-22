@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  blockchain:
+    container_name: 10c-blockchain-defi
+    image: 10c-blockchain
+    build: .
+    command: "npx hardhat node"
+    ports:
+      - "8545:8545"
+    env_file: 
+      - .env
+    volumes: 
+      - ".:/app"
+    networks:
+      - 10c-network
+
+networks:
+  10c-network:
+    name: 10c-network

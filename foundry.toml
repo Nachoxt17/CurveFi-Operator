@@ -1,0 +1,10 @@
+[default]
+src = 'contracts'                                             # the source directory
+test = 'contracts/test'                                       # the test directory
+out = 'artifacts/contracts'
+remappings = [
+'hardhat/=node_modules/hardhat/',
+'@openzeppelin/=node_modules/@openzeppelin/',
+'forge-std/=lib/forge-std/src/'
+]
+libraries = []

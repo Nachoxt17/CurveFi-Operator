@@ -1,0 +1,188 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "Received",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "PoolAddresstoStandard",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "curveFiPool",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "LPTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[2]",
+        "name": "_amountTIndexes236",
+        "type": "uint256[2]"
+      },
+      {
+        "internalType": "uint256[3]",
+        "name": "_amountTIndexes15",
+        "type": "uint256[3]"
+      },
+      {
+        "internalType": "uint256[4]",
+        "name": "_amountTIndexes4",
+        "type": "uint256[4]"
+      }
+    ],
+    "name": "addLiquidity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "poolAddress",
+        "type": "address"
+      }
+    ],
+    "name": "deletePool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "curveFiPool",
+        "type": "address"
+      },
+      {
+        "internalType": "int128",
+        "name": "_tokenInIndexInt",
+        "type": "int128"
+      },
+      {
+        "internalType": "int128",
+        "name": "_tokenOutIndexInt",
+        "type": "int128"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_tokenInIndexUint",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_tokenOutIndexUint",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amountIn",
+        "type": "uint256"
+      }
+    ],
+    "name": "exchangeTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "LPTokenAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getLPTokensAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "curveFiPool",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "LPTokenAddress",
+        "type": "address"
+      }
+    ],
+    "name": "removeLiquidity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "poolAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "poolStandard",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPoolStandard",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]
