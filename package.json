@@ -19,8 +19,6 @@
     "node": "npx hardhat node --network hardhat",
     "test": "npx hardhat test --network hardhat"
   },
-  "main": "index.js",
-  "types": "index.d.ts",
   "homepage": "https://10clouds.com/",
   "dependencies": {
     "@uniswap/sdk": "^3.0.3",
