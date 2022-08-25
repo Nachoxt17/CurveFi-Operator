@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.9;
 
-import "./ICurveFiPool.sol";
-import "./IERC20Modified.sol";
+import { ICurveFiPool } from "./ICurveFiPool.sol";
+import { IERC20Modified } from "./IERC20Modified.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title Curve Finance Pool Operator Example.
 /// @author Ignacio Ceaglio for 10Clouds.
@@ -95,9 +96,8 @@ import "./IERC20Modified.sol";
 
 //-Addresses Source: https://curve.readthedocs.io/ref-addresses.html#base-pools
 
-contract CurveFiOperator {
+contract CurveFiOperator is Ownable {
     mapping(address => uint256) public PoolAddresstoStandard;
-    event Received(address sender, uint256 value);
 
     constructor() {
         PoolAddresstoStandard[0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7] = 1;
@@ -122,12 +122,12 @@ contract CurveFiOperator {
         return IERC20Modified(LPTokenAddress).balanceOf(address(this));
     }
 
-    function setPoolStandard(address poolAddress, uint256 poolStandard) public {
+    function setPoolStandard(address poolAddress, uint256 poolStandard) public onlyOwner {
         require(poolStandard >= 1 || poolStandard <= 6, "Wrong Standard Number");
         PoolAddresstoStandard[poolAddress] = poolStandard;
     }
 
-    function deletePool(address poolAddress) public {
+    function deletePool(address poolAddress) public onlyOwner {
         delete PoolAddresstoStandard[poolAddress];
     }
 
@@ -362,14 +362,5 @@ contract CurveFiOperator {
         address tokenOutAddress = ICurveFiPool(curveFiPool).coins(_tokenOutIndexUint);
         uint256 tokenOutAmount = IERC20Modified(tokenOutAddress).balanceOf(address(this));
         IERC20Modified(tokenOutAddress).transfer(msg.sender, tokenOutAmount);
-    }
-
-    function safeTransferETH(address to, uint256 value) private {
-        (bool success, ) = to.call{ value: value }(new bytes(0));
-        require(success, "TransferHelper: ETH_TRANSFER_FAILED");
-    }
-
-    receive() external payable {
-        emit Received(msg.sender, msg.value);
     }
 }
