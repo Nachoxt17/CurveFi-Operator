@@ -31,8 +31,6 @@ const hardhatConfig: HardhatUserConfig = {
     defaultNetwork: "localhost",
     networks: {
         hardhat: {
-            allowUnlimitedContractSize: true,
-            // used in unit tests
             chainId: chainIds.hardhat,
             forking: {
                 url: `https://eth-mainnet.alchemyapi.io/v2/${envConfig.crypto.ALCHEMY_KEY}`,
