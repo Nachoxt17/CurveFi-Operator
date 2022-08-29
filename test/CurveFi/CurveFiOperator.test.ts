@@ -67,10 +67,10 @@ describe("CurveFinance Pool S.Contract", function () {
 
     /**-User 1 Balances After Adding DAI 90, USDC 100 and USDT 95 of Liquidity
     and Receiving his L.P. Tokens:*/
-    assert((user1DAIBalanceAfter).gte("137980541946824268197393"));
-    assert((user1USDCBalanceAfter).gte("182967990032"));
-    assert((user1USDTBalanceAfter).gte("137854201344"));
-    assert((user1LPTokensAfter).gte("278913654414532411523"));
+    assert((user1DAIBalanceAfter).lt(user1DAIBalanceBefore));
+    assert((user1USDCBalanceAfter).lt(user1USDCBalanceBefore));
+    assert((user1USDTBalanceAfter).lt(user1USDTBalanceBefore));
+    assert((user1LPTokensAfter).gt(user1LPTokensBefore));
     /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
      * the Numbers will Change and this Assertion will Fail.*/
   });
@@ -105,10 +105,10 @@ describe("CurveFinance Pool S.Contract", function () {
 
     /**-User 1 Balances After Removing all his DAI, USDC and USDT Liquidity
     and Burning his 278,913654414532411523 L.P. Tokens:*/
-    assert((user1DAIBalanceAfter).gte("138083008122883138909170"));
-    assert((user1USDCBalanceAfter).gte("183079286289"));
-    assert((user1USDTBalanceAfter).gte("137925442659"));
-    assert((user1LPTokensAfter).gte("0"));
+    assert((user1DAIBalanceAfter).gt(user1DAIBalanceBefore));
+    assert((user1USDCBalanceAfter).gt(user1USDCBalanceBefore));
+    assert((user1USDTBalanceAfter).gt(user1USDTBalanceBefore));
+    assert((user1LPTokensAfter).lt(user1LPTokensBefore));
     /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
      * the Numbers will Change and this Assertion will Fail.*/
   });
@@ -141,8 +141,8 @@ describe("CurveFinance Pool S.Contract", function () {
       console.log(`User1 USDT: ${user1USDTBalanceAfter}`);
 
       //-User 1 Balances After Exchanging USDC 1.000 for USDT:
-      assert((user1USDCBalanceAfter).gte("182079286289"));
-      assert((user1USDTBalanceAfter).gte("138925089626"));
+      assert((user1USDCBalanceAfter).lt(user1USDCBalanceBefore));
+      assert((user1USDTBalanceAfter).gt(user1USDTBalanceBefore));
       /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
      * the Numbers will Change and this Assertion will Fail.*/
   });
