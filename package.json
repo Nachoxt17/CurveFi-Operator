@@ -2,7 +2,7 @@
   "name": "blockchain-defi-whitelabel-template",
   "description": "10C's BlockchainTeam Hardhat DeFi template",
   "version": "1.0.0",
-  "author": "10C's BlockchainTeam <defi@10clouds.com>",
+  "author": "Ignacio Ceaglio for 10C's BlockchainTeam <defi@10clouds.com>",
   "license": "MIT",
   "keywords": [
     "ethereum",
