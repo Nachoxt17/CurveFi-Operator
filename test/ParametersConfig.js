@@ -10,7 +10,7 @@ const WETH_10 = "0xf4BB2e28688e89fCcE3c0580D37d36A7672E8A9F";
 const DAI_WHALE = "0x935f64B44B5C48A1539C4AdA5161D27ace4205b5"; //-Also whale of USDC and USDT.
 const USDC_WHALE = "0x33A64dcDfa041bEfebC9161a3e0c6180cd94Fa89";
 const USDT_WHALE = "0x5041ed759Dd4aFc3a72b8192C143F72f4724081A"; //-Also whale of USDC.
-const WETH_WHALE = "";
+const WETH_WHALE = "0x8EB8a3b98659Cce290402893d0123abb75E3ab28"; //-Also whale of USDC, WBTC, DAI and USDT.
 const WBTC_WHALE = "";
 
 module.exports = {
@@ -23,6 +23,6 @@ module.exports = {
   DAI_WHALE,
   USDC_WHALE,
   USDT_WHALE,
-  /**WETH_WHALE,
-  WBTC_WHALE,*/
+  WETH_WHALE,
+  /**WBTC_WHALE,*/
 };
