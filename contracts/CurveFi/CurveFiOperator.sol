@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 import { ICurveFiPool } from "./ICurveFiPool.sol";
-import { IERC20Modified } from "./IERC20Modified.sol";
+import { IERC20Modified } from "../../IERC20Modified.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title Curve Finance Pool Operator Example.
@@ -134,7 +134,7 @@ contract CurveFiOperator is Ownable {
     /// param _amountTIndexes: List of Amounts of Different Coins to Deposit. Ex: [2 DAI, 4 USDC, 3 USDT].
     /// param minLPTokenMintAmount: Minimum amount of L.P. Tokens to mint from the deposit.
     /// return Returns the Minimum Amount of L.P. tokens received in exchange for the deposited tokens.
-    /// @dev More Info Here: https://resources.curve.fi/lp/depositing/depositing-into-the-y-pool
+    /// @dev More Info Here: https://resources.curve.fi/lp/depositing/
     /// @dev AddLiquidity Function for Standars 1, 2, 3, 4, 5 and 6.
     /// @dev For the Inputs, Instert the uint256[N] correspondent to the Pool that you are Going to use,
     /// and Leave the Rest of uint256[N] full of Zeros Inside (Ex:_ "[0, 0, 0, 0]").
@@ -180,7 +180,6 @@ contract CurveFiOperator is Ownable {
                 } else if (poolStandard == 5) {
                     currentCoinAddress = ICurveFiPool(curveFiPool).coins(j);
                 }
-                IERC20Modified(currentCoinAddress).approve(address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).transferFrom(msg.sender, address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).approve(curveFiPool, _amountTIndexes[i]);
                 j++;
@@ -220,7 +219,6 @@ contract CurveFiOperator is Ownable {
                 } else if (poolStandard == 6) {
                     currentCoinAddress = ICurveFiPool(curveFiPool).coins(j);
                 }
-                IERC20Modified(currentCoinAddress).approve(address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).transferFrom(msg.sender, address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).approve(curveFiPool, _amountTIndexes[i]);
                 j++;
@@ -254,7 +252,6 @@ contract CurveFiOperator is Ownable {
         for (uint256 i = 0; i < 4; i++) {
             if (_amountTIndexes[i] > 0) {
                 address currentCoinAddress = ICurveFiPool(curveFiPool).coins(j);
-                IERC20Modified(currentCoinAddress).approve(address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).transferFrom(msg.sender, address(this), _amountTIndexes[i]);
                 IERC20Modified(currentCoinAddress).approve(curveFiPool, _amountTIndexes[i]);
                 j++;
@@ -283,7 +280,6 @@ contract CurveFiOperator is Ownable {
         //(1)-User's L.P. ERC-20 Tokens are Transferred to the Operator S.C.:
         uint256 userLPTokensAmount = IERC20Modified(LPTokenAddress).balanceOf(msg.sender);
 
-        IERC20Modified(LPTokenAddress).approve(address(this), userLPTokensAmount);
         IERC20Modified(LPTokenAddress).transferFrom(msg.sender, address(this), userLPTokensAmount);
         IERC20Modified(LPTokenAddress).approve(curveFiPool, userLPTokensAmount);
 
@@ -350,7 +346,6 @@ contract CurveFiOperator is Ownable {
             tokenInAddress = ICurveFiPool(curveFiPool).coins(_tokenInIndexInt);
         }
 
-        IERC20Modified(tokenInAddress).approve(address(this), _amountIn);
         IERC20Modified(tokenInAddress).transferFrom(msg.sender, address(this), _amountIn);
         IERC20Modified(tokenInAddress).approve(curveFiPool, _amountIn);
 
@@ -364,4 +359,3 @@ contract CurveFiOperator is Ownable {
         IERC20Modified(tokenOutAddress).transfer(msg.sender, tokenOutAmount);
     }
 }
-
