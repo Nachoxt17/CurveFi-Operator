@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 import { ICurveFiPool } from "./ICurveFiPool.sol";
-import { IERC20Modified } from "../../IERC20Modified.sol";
+import { IERC20Modified } from "../IERC20Modified.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title Curve Finance Pool Operator Example.
