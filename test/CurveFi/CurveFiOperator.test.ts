@@ -1,9 +1,6 @@
 import { assert } from "chai";
-
 import { ethers } from "hardhat";
-
 const { DAI, DAI_WHALE, USDC, USDC_WHALE, USDT, USDT_WHALE } = require("../ParametersConfig.js");
-
 let daiToken: any, usdcToken: any, usdtToken: any, LPtoken: any, operator: any, admin: any, user1: any;
 
 describe("CurveFinance Pool S.Contract", function () {
@@ -18,11 +15,11 @@ describe("CurveFinance Pool S.Contract", function () {
     admin = await ethers.getImpersonatedSigner(USDC_WHALE);
     user1 = await ethers.getImpersonatedSigner(DAI_WHALE);
 
-    daiToken = await ethers.getContractAt("IERC20Modified", DAI, admin);
-    usdcToken = await ethers.getContractAt("IERC20Modified", USDC, admin);
-    usdtToken = await ethers.getContractAt("IERC20Modified", USDT, admin);
+    daiToken = await ethers.getContractAt("IERC20", DAI, admin);
+    usdcToken = await ethers.getContractAt("IERC20", USDC, admin);
+    usdtToken = await ethers.getContractAt("IERC20", USDT, admin);
 
-    LPtoken = await ethers.getContractAt("IERC20Modified", LP_TOKEN, admin);
+    LPtoken = await ethers.getContractAt("IERC20", LP_TOKEN, admin);
 
     let CurveFiOperator = await ethers.getContractFactory("CurveFiOperator");
     operator = await CurveFiOperator.deploy();
@@ -47,12 +44,9 @@ describe("CurveFinance Pool S.Contract", function () {
     await operator
       .connect(user1)
       .addLiquidity(CURVEFI_POOL_ADDRESS,
-      LP_TOKEN,
-      [0, 0],
       [ethers.utils.parseUnits("90", 18),
       ethers.utils.parseUnits("100", DECIMALS),
-      ethers.utils.parseUnits("95", DECIMALS)],
-      [0, 0, 0, 0]);
+      ethers.utils.parseUnits("95", DECIMALS)]);
 
     let user1DAIBalanceAfter = await daiToken.balanceOf(user1.address);
     let user1USDCBalanceAfter = await usdcToken.balanceOf(user1.address);
@@ -72,7 +66,7 @@ describe("CurveFinance Pool S.Contract", function () {
     assert((user1USDTBalanceAfter).lt(user1USDTBalanceBefore));
     assert((user1LPTokensAfter).gt(user1LPTokensBefore));
     /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
-     * the Numbers will Change and this Assertion will Fail.*/
+     * the Numbers will Change.*/
   });
 
   it("CurveFi Pool Removes Liquidity", async () => {
@@ -90,7 +84,7 @@ describe("CurveFinance Pool S.Contract", function () {
     await LPtoken.connect(user1).approve(operator.address, user1LPTokensBefore);
 
     await operator.connect(user1)
-    .removeLiquidity(CURVEFI_POOL_ADDRESS, LP_TOKEN);
+    .removeLiquidity(CURVEFI_POOL_ADDRESS);
 
     let user1DAIBalanceAfter = await daiToken.balanceOf(user1.address);
     let user1USDCBalanceAfter = await usdcToken.balanceOf(user1.address);
@@ -110,7 +104,7 @@ describe("CurveFinance Pool S.Contract", function () {
     assert((user1USDTBalanceAfter).gt(user1USDTBalanceBefore));
     assert((user1LPTokensAfter).lt(user1LPTokensBefore));
     /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
-     * the Numbers will Change and this Assertion will Fail.*/
+     * the Numbers will Change.*/
   });
 
   it("CurveFi Pool Exchanges Tokens", async () => {
@@ -125,11 +119,8 @@ describe("CurveFinance Pool S.Contract", function () {
 
     await operator.connect(user1)
     .exchangeTokens(
-      CURVEFI_POOL_ADDRESS,
-      1,
-      2,
-      1,
-      2,
+      USDC,
+      USDT,
       ethers.utils.parseUnits("1000", DECIMALS)
       );
 
@@ -144,6 +135,6 @@ describe("CurveFinance Pool S.Contract", function () {
       assert((user1USDCBalanceAfter).lt(user1USDCBalanceBefore));
       assert((user1USDTBalanceAfter).gt(user1USDTBalanceBefore));
       /**-NOTE:_ If you Change the BlockNumber "15269796" from the "hardhat.config.ts",
-     * the Numbers will Change and this Assertion will Fail.*/
+     * the Numbers will Change.*/
   });
 });
