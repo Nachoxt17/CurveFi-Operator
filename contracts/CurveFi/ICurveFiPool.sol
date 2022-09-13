@@ -1,8 +1,58 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: M.I.T.
 pragma solidity ^0.8.9;
 
 interface ICurveFiPool {
+    //-Events:
+
+    event TokenExchange(
+        address indexed buyer,
+        int128 sold_id,
+        uint256 tokens_sold,
+        int128 bought_id,
+        uint256 tokens_bought
+    );
+
+    event AddLiquidity(
+        address indexed provider,
+        uint256[] token_amounts,
+        uint256[] fees,
+        uint256 invariant,
+        uint256 token_supply
+    );
+
+    event RemoveLiquidity(address indexed provider, uint256[] token_amounts, uint256[] fees, uint256 token_supply);
+
+    event RemoveLiquidityOne(address indexed provider, uint256 token_amount, uint256 coin_amount);
+
+    event RemoveLiquidityImbalance(
+        address indexed provider,
+        uint256[] token_amounts,
+        uint256[] fees,
+        uint256 invariant,
+        uint256 token_supply
+    );
+
+    event CommitNewAdmin(uint256 indexed deadline, address indexed admin);
+
+    event NewAdmin(address indexed admin);
+
+    event CommitNewFee(uint256 indexed deadline, uint256 fee, uint256 admin_fee);
+
+    event NewFee(uint256 fee, uint256 admin_fee);
+
+    event RampA(uint256 old_A, uint256 new_A, uint256 initial_time, uint256 future_time);
+
+    event StopRampA(uint256 A, uint256 t);
+
+    //-Functions:
+
     function get_virtual_price() external returns (uint256 out);
+
+    function calc_token_amount(uint256[2] calldata _amounts, bool _is_deposit) external view returns (uint256);
+
+    function calc_token_amount(uint256[3] calldata _amounts, bool _is_deposit) external view returns (uint256);
+
+    function calc_token_amount(uint256[4] calldata _amounts, bool _is_deposit) external view returns (uint256);
 
     function add_liquidity(uint256[2] calldata amounts, uint256 min_mint_amount) external;
 
@@ -88,9 +138,9 @@ interface ICurveFiPool {
 
     function A() external returns (int128 out);
 
-    function fee() external returns (int128 out);
+    function fee() external returns (uint256 out);
 
-    function admin_fee() external returns (int128 out);
+    function admin_fee() external returns (uint256 out);
 
     function owner() external returns (address out);
 
