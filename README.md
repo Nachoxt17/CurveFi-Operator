@@ -1,4 +1,4 @@
-# 10Clouds-De.Fi.-WhiteLabel-Smart-Contracts
+# De.Fi.-WhiteLabel-Smart-Contracts
 
 - How to Interact with the Deployed Smart Contract:
   https://docs.alchemy.com/alchemy/tutorials/hello-world-smart-contract/interacting-with-a-smart-contract#step-6-update-the-message
