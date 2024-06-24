@@ -1,4 +1,6 @@
 # De.Fi.-WhiteLabel-Smart-Contracts
+## Curve-Finance-Intermediary-Operator
+### These Smart Contracts serve as a template or easier gateway for Developers to Integrate their new De.Fi. projects with Curve Finance Pools, without having to spend hours at a time reading their Documentations. The hard work has been done by me already and you can simply fork this to implement interactions with Curve Finance Pools.
 
 - How to Interact with the Deployed Smart Contract:
   https://docs.alchemy.com/alchemy/tutorials/hello-world-smart-contract/interacting-with-a-smart-contract#step-6-update-the-message
